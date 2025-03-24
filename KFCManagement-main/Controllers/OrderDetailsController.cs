@@ -21,6 +21,15 @@ namespace KFCManagement.Controllers
 
         public IActionResult AddToCart(int itemId, int quantity)
         {
+            var customerId = HttpContext.Session.GetInt32("CustomerId");
+
+            // Check if CustomerId exists in session
+            if (customerId == null)
+            {
+                TempData["Error"] = "Bạn cần đăng nhập để sử dụng chức năng này.";
+                return RedirectToAction("Index", "LoginC");
+            }
+
             if (quantity <= 0)
             {
                 return RedirectToAction("Index", "Home");
@@ -29,7 +38,7 @@ namespace KFCManagement.Controllers
             var userId = HttpContext.Session.GetInt32("CustomerId") ?? 0;
             if (userId == 0)
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "LoginC");
             }
 
             using var transaction = _context.Database.BeginTransaction();
@@ -90,7 +99,7 @@ namespace KFCManagement.Controllers
 
             return RedirectToAction("Index", "OrderDetails");
         }
-
+    
         // Hiển thị giỏ hàng
         public IActionResult Index()
         {
@@ -99,7 +108,7 @@ namespace KFCManagement.Controllers
             if (userId == 0)
             {
                 // Trường hợp không có CustomerId trong Session, yêu cầu người dùng đăng nhập
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "LoginC");
             }
 
             // Lấy giỏ hàng của người dùng từ cơ sở dữ liệu
@@ -142,7 +151,7 @@ namespace KFCManagement.Controllers
             if (userId == 0)
             {
                 // Trường hợp không có CustomerId trong Session, yêu cầu người dùng đăng nhập
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "LoginC");
             }
 
             // Lấy đơn hàng của người dùng có trạng thái "pending"
@@ -176,7 +185,7 @@ namespace KFCManagement.Controllers
             if (userId == 0)
             {
                 // Trường hợp không có CustomerId trong Session, yêu cầu người dùng đăng nhập
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "LoginC");
             }
 
             // Lấy đơn hàng đã hoàn thành

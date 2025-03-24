@@ -1,19 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace KFCManagement.Models;
-
-public partial class Category
+namespace KFCManagement.Models
 {
-    public int CategoryId { get; set; }
+    public partial class Category
+    {
+        [Key]
+        public int CategoryId { get; set; }
 
-    public string Name { get; set; } = null!;
+        [Required(ErrorMessage = "Tên danh mục không được để trống.")]
+        [Display(Name = "Tên danh mục")]
+        public string Name { get; set; } = null!;
 
-    public string? Description { get; set; }
+        [Display(Name = "Mô tả")]
+        public string? Description { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+        [Display(Name = "Ngày tạo")]
+        public DateTime? CreatedAt { get; set; }
 
-    public DateTime? UpdatedAt { get; set; }
+        [Display(Name = "Ngày cập nhật")]
+        public DateTime? UpdatedAt { get; set; }
 
-    public virtual ICollection<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
+        [Display(Name = "Danh sách món ăn")]
+        public virtual ICollection<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
+    }
 }

@@ -157,7 +157,7 @@
                 <div class="col-md-3 menu-item">
                     <img src="@item.Description" alt="@item.Name" class="" width="100%" height="300px">
                     <h3>@item.Name</h3>
-                    <p><strong>Giá: @item.Price VND</strong></p>
+                    <p><strong>Giá: @string.Format("{0:N0}", item.Price) VND</strong></p>
                 </div>
             }
         </div>
@@ -178,7 +178,7 @@
                 <p>Hãy để KFC mang đến những bữa tiệc vui vẻ với thực đơn hấp dẫn và không gian ấm cúng.</p>
             </div>
             <div class="col-md-4 service-item">
-                <img src="~/images/kfc-store1.jpg" alt="Cửa hàng KFC" class="" width="100%" height="300px">
+                <img src="~/images/kfc-store.jpg" alt="Cửa hàng KFC" class="" width="100%" height="300px">
                 <h3>Ăn Tại Chỗ</h3>
                 <p>Thưởng thức gà rán nóng hổi tại hệ thống nhà hàng KFC hiện đại, tiện nghi.</p>
             </div>
